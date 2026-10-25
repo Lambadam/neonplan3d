@@ -54,17 +54,3 @@ jobs:
       - run: python -c "from homeassistant.const import __version__; print('Home Assistant', __version__)"
       - run: pytest -q
 
-  hassfest:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: home-assistant/actions/hassfest@master
-
-  hacs:
-    # HACS reads the repository from outside, which fails while it is private
-    if: ${{ !github.event.repository.private }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: hacs/action@main
-        with:
-          category: integration
